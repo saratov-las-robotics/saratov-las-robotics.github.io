@@ -1,0 +1,29 @@
+{
+  "name": "Helloworld",
+  "version": "0.0.1",
+  "description": "My first hello world project",
+  "author": "Your name",
+  "license": "GPL-3.0-or-later",
+  "main": "docs/index.html",
+  "scripts": {
+    "scss": "node-sass --output-style expanded --indent-width 2 -o docs/css src/scss",
+    "uglify": "uglifyjs src/js/*.js -m -o docs/js/main.js",
+    "serve": "browser-sync start --server --cwd docs --serveStatic docs --index \"docs/index.html\" --files \"docs/*.html, docs/css/*.css, docs/js/*.js\"",
+    "build:css": "yarn run scss",
+    "build:js": "yarn run uglify",
+    "build:html": "cp src/html/* docs",
+    "build:all": "yarn run build:css && yarn run build:js && yarn run build:html",
+    "watch:css": "onchange \"src/scss\" -- yarn run build:css",
+    "watch:js": "onchange \"src/js\" -- yarn run build:js",
+    "watch:html": "onchange \"src/html\" -- yarn run build:html",
+    "watch:all": "npm-run-all -p serve watch:css watch:js watch:html",
+    "start": "yarn run build:all && yarn run watch:all"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "node-sass": "^6.0.1",
+    "onchange": "^7.1.0",
+    "uglify-js": "^3.14.2",
+    "yarn-run-all": "^3.1.1"
+  }
+}
